@@ -29,7 +29,7 @@ public class HomeController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String index() {
-        return "/index";
+        return "/common/index";
     }
 
     @RequestMapping(value = "/login")
