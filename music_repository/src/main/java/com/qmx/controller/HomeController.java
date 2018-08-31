@@ -21,13 +21,12 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/login")
 public class HomeController {
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-    @RequestMapping(value = "/skipLogin")
-    public String login() {
-        return "login";
-    }
-
-    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    /**
+     * 主页
+     *
+     * @return
+     */
+    @RequestMapping(value = "/main")
     public String index() {
         return "/common/index";
     }
@@ -53,16 +52,6 @@ public class HomeController {
             request.setAttribute("msg", "用户或密码不正确！");
             return "login";
         }
-    }
-
-    /**
-     * 主页
-     *
-     * @return
-     */
-    @RequestMapping(value = {"/main", ""})
-    public String main() {
-        return "common/main";
     }
 
     /**
