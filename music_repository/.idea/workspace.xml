@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="e7835cf3-47d5-4e78-8377-3eab7a73edfe" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/common/main.ftl" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/templates/index.ftl" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/qmx/controller/HomeController.class" afterPath="$PROJECT_DIR$/target/classes/com/qmx/controller/HomeController.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
@@ -977,15 +978,15 @@
       <workItem from="1534574675669" duration="23920000" />
       <workItem from="1534780210996" duration="1185000" />
       <workItem from="1535616563859" duration="4764000" />
-      <workItem from="1535677247434" duration="1120000" />
+      <workItem from="1535677247434" duration="1717000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91234000" />
+    <option name="totallyTimeSpent" value="91831000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="1" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
