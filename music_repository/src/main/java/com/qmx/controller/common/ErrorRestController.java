@@ -11,8 +11,10 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,8 +30,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/error")
 @EnableConfigurationProperties({ServerProperties.class})
-public class ErrorContronller implements ErrorController {
-    private static final Logger logger = LoggerFactory.getLogger(ErrorContronller.class);
+public class ErrorRestController implements ErrorController {
+    private static final Logger logger = LoggerFactory.getLogger(ErrorRestController.class);
     @Autowired
     private ErrorAttributes errorAttributes;
     @Value("${server.error.path:${error.path:/error}}")
@@ -43,6 +45,15 @@ public class ErrorContronller implements ErrorController {
         response.setStatus(getStatus(request).value());
         Map<String, Object> model = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
         return new ModelAndView(url, model);
+    }
+
+    @RequestMapping
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
+        Map<String, Object> body = getErrorAttributes(request,
+                isIncludeStackTrace(request, MediaType.ALL));
+        HttpStatus status = getStatus(request);
+        return new ResponseEntity<Map<String, Object>>(body, status);
     }
 
     /**
