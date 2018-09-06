@@ -2,10 +2,14 @@ package com.qmx.service;
 
 
 import com.qmx.base.BaseService;
+import com.qmx.exception.BusinessException;
 import com.qmx.mapper.UserMapper;
 import com.qmx.model.User;
 
 import com.qmx.util.PasswordHelper;
+import com.qmx.util.WebUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
@@ -15,29 +19,33 @@ import org.springframework.util.StringUtils;
 @Service
 @CacheConfig(cacheNames = "User")
 public class UserService extends BaseService<User> {
+    private static Logger logger = LoggerFactory.getLogger(UserService.class);
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private UserService userService;
+
     public User selectByUsername(String username) {
         return userMapper.selectByUsername(username);
     }
 
     /**
-     *存储用户
+     * 存储用户
+     *
      * @param user 保存新的用户
      */
-    public boolean saveUser(User user){
-        Assert.notNull(user.getPassword(),"密码不能为空");
-        Assert.notNull(user.getUsername(),"用户名不能为空");
+    public boolean saveUser(User user) {
+        Assert.notNull(user.getPassword(), "密码不能为空");
+        Assert.notNull(user.getUsername(), "用户名不能为空");
         //根据用户名查询用户，判断是否该用户名已经被占用
-        User userResult=userMapper.selectByUsername(user.getUsername());
-        if (StringUtils.isEmpty(userResult)){
+        User userResult = userMapper.selectByUsername(user.getUsername());
+        if (userResult != null) {
+            logger.error("{}:用户名已被占用", user.getUsername());
             return false;
-        }else {
+        } else {
             //实例化密码加密工具
-            PasswordHelper passwordHelper=new PasswordHelper();
+            PasswordHelper passwordHelper = new PasswordHelper();
             //加密密码
             passwordHelper.encryptPassword(user);
             userService.save(user);

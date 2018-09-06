@@ -21,6 +21,12 @@ public abstract class BaseModel implements Serializable {
     private Date createTime;
     private Long updateBy;
     private Date updateTime;
+    @TableField(exist = false)
+    private Integer page = Integer.valueOf(1);
+    @TableField(exist = false)
+    private Integer rows = Integer.valueOf(10);
+    @TableField(exist = false)
+    private String orderBy = "create_time";
 
     @TableField(exist = false)
     private String keyword;
@@ -33,8 +39,7 @@ public abstract class BaseModel implements Serializable {
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
@@ -48,8 +53,7 @@ public abstract class BaseModel implements Serializable {
     }
 
     /**
-     * @param enable
-     *            the enable to set
+     * @param enable the enable to set
      */
     public void setEnable(Integer enable) {
         this.enable = enable;
@@ -63,8 +67,7 @@ public abstract class BaseModel implements Serializable {
     }
 
     /**
-     * @param remark
-     *            the remark to set
+     * @param remark the remark to set
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
@@ -78,8 +81,7 @@ public abstract class BaseModel implements Serializable {
     }
 
     /**
-     * @param createBy
-     *            the createBy to set
+     * @param createBy the createBy to set
      */
     public void setCreateBy(Long createBy) {
         this.createBy = createBy;
@@ -93,8 +95,7 @@ public abstract class BaseModel implements Serializable {
     }
 
     /**
-     * @param createTime
-     *            the createTime to set
+     * @param createTime the createTime to set
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
@@ -108,8 +109,7 @@ public abstract class BaseModel implements Serializable {
     }
 
     /**
-     * @param updateBy
-     *            the updateBy to set
+     * @param updateBy the updateBy to set
      */
     public void setUpdateBy(Long updateBy) {
         this.updateBy = updateBy;
@@ -123,8 +123,7 @@ public abstract class BaseModel implements Serializable {
     }
 
     /**
-     * @param updateTime
-     *            the updateTime to set
+     * @param updateTime the updateTime to set
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
@@ -138,4 +137,27 @@ public abstract class BaseModel implements Serializable {
         this.keyword = keyword;
     }
 
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
 }

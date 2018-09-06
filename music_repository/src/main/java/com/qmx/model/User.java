@@ -2,6 +2,7 @@ package com.qmx.model;
 
 import com.qmx.base.BaseModel;
 
+
 public class User extends BaseModel {
     private static final long serialVersionUID = -8736616045315083846L;
 
@@ -42,23 +43,6 @@ public class User extends BaseModel {
         this.password = password;
     }
 
-    /**
-     * 获取是否启用
-     *
-     * @return enable - 是否启用
-     */
-    public Integer getEnable() {
-        return enable;
-    }
-
-    /**
-     * 设置是否启用
-     *
-     * @param enable 是否启用
-     */
-    public void setEnable(Integer enable) {
-        this.enable = enable;
-    }
 
     @Override
     public String toString() {
