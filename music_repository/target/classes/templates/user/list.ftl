@@ -69,6 +69,7 @@
             username: $("#username").val(),
             password: $("#password").val(),
             success: function (data) {
+                alert(data);
                 if (data.data = "success") {
                     $.messager.alert('信息提示', '提交成功！', 'info');
                     $('#wu-dialog-2').dialog('close');
