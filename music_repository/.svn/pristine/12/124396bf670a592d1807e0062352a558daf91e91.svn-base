@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qmx.mapper.UserMapper">
+    <select id="selectIdPage" resultType="java.lang.Long"> SELECT id from user </select>
+
+    <resultMap id="BaseResultMap" type="com.qmx.model.User">
+        <result column="id" property="id"/>
+        <result column="enable_" property="enable"/>
+        <result column="remark" property="remark"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="enable" property="enable"/>
+    </resultMap>
+
+    <select id="selectByUsername" resultMap="BaseResultMap">
+      SELECT * FROM user WHERE username = #{username}
+    </select>
+
+
+    <!--查询用户名是否存在，排除重复添加相同的用户-->
+    <select id="findUserByUsername" parameterType="java.util.Map" resultType="com.qmx.model.User">
+        SELECT * FROM user
+        <where>
+            <if test="cm.username != null and cm.username != ''">
+                username=#{cm.username}
+            </if>
+        </where>
+    </select>
+</mapper>
