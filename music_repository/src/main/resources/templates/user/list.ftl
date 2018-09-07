@@ -72,6 +72,7 @@
                 if (data.data = "success") {
                     $.messager.alert('信息提示', '提交成功！', 'info');
                     $('#wu-dialog-2').dialog('close');
+                    window.location.href=;
                 }
                 else {
                     $.messager.alert('信息提示', '提交失败！', 'info');

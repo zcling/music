@@ -40,10 +40,10 @@ public class AdminController {
     public UseCommon getData(User user) {
         Map prams = new HashMap();
         prams = InstanceUtil.transBean2Map(user);
-        Page<User> page = userService.query(prams);
+        List<User> users = userService.queryList(prams);
         UseCommon useCommon = new UseCommon();
-        useCommon.setRows(page.getRecords());
-        useCommon.setTotal(page.getTotal() + "");
+        useCommon.setRows(users);
+        useCommon.setTotal(users.size() + "");
         return useCommon;
     }
 
