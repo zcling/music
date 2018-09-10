@@ -1,6 +1,6 @@
 package com.qmx.controller.user;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.*;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.qmx.exception.BaseException;
 import com.qmx.exception.BusinessException;
@@ -8,6 +8,7 @@ import com.qmx.model.User;
 import com.qmx.model.common.UseCommon;
 import com.qmx.service.UserService;
 import com.qmx.util.InstanceUtil;
+import com.qmx.util.JSONUtil;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +42,10 @@ public class AdminController {
     public UseCommon getData(User user) {
         Map prams = new HashMap();
         prams = InstanceUtil.transBean2Map(user);
-        Page<User> page = userService.query(prams);
+        List<User> users = userService.queryList(prams);
         UseCommon useCommon = new UseCommon();
-        useCommon.setRows(page.getRecords());
-        useCommon.setTotal(page.getTotal() + "");
+        useCommon.setRows(users);
+        useCommon.setTotal(users.size() + "");
         return useCommon;
     }
 
@@ -67,6 +69,23 @@ public class AdminController {
         } catch (Exception e) {
             e.printStackTrace();
             jsonObject.put("data", "error");
+        }
+        return jsonObject;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public JSONObject delete(String ids) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            JSONArray jsonArray = JSON.parseArray(ids);
+            for (Object o : jsonArray) {
+                userService.delete((Long) o);
+            }
+            jsonObject.put("data", "success");
+        } catch (Exception e) {
+            jsonObject.put("data", "error");
+            e.printStackTrace();
         }
         return jsonObject;
     }
