@@ -1,8 +1,10 @@
 package com.qmx.model;
 
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableName;
 import com.qmx.base.BaseModel;
 
-
+@TableName("user")
 public class User extends BaseModel {
     private static final long serialVersionUID = -8736616045315083846L;
 
@@ -10,10 +12,8 @@ public class User extends BaseModel {
 
     private String password;
 
-    /**
-     * 是否启用
-     */
-    private Integer enable;
+    @TableField(" num_sn")
+    private String numSn;
 
     /**
      * @return username
@@ -43,14 +43,11 @@ public class User extends BaseModel {
         this.password = password;
     }
 
+    public String getNumSn() {
+        return numSn;
+    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + super.getId() +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", enable=" + enable +
-                '}';
+    public void setNumSn(String numSn) {
+        this.numSn = numSn;
     }
 }

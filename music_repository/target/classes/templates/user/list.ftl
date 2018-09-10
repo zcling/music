@@ -60,6 +60,18 @@
 </div>
 <!-- End of easyui-dialog -->
 <script type="text/javascript">
+    //刷新当前标签Tabs
+    function RefreshTab(currentTab) {
+        var url = $(currentTab.panel('options')).attr('href');
+        $('#tabs').tabs('update', {
+            tab: currentTab,
+            options: {
+                href: url
+            }
+        });
+        currentTab.panel('refresh');
+    }
+
     /**
      * Name 添加记录
      */
@@ -72,7 +84,8 @@
                 if (data.data = "success") {
                     $.messager.alert('信息提示', '提交成功！', 'info');
                     $('#wu-dialog-2').dialog('close');
-                    window.location.href="/user/list";
+                    var currentTab = $('#wu-tabs').tabs('getSelected');
+                    RefreshTab(currentTab);
                 }
                 else {
                     $.messager.alert('信息提示', '提交失败！', 'info');
@@ -108,12 +121,14 @@
                 var items = $('#wu-datagrid-2').datagrid('getSelections');
                 var ids = [];
                 $(items).each(function () {
-                    ids.push(this.productid);
+                    ids.push(this.id);
                 });
+                ids = JSON.stringify(ids);
                 //alert(ids);return;
                 $.ajax({
-                    url: '',
-                    data: '',
+                    url: '/user/delete',
+                    method: 'get',
+                    data: {"ids": ids},
                     success: function (data) {
                         if (data) {
                             $.messager.alert('信息提示', '删除成功！', 'info');
@@ -243,10 +258,11 @@
             {checkbox: true},
             {field: 'id', title: 'id', width: 100, sortable: true},
             {field: 'username', title: '账号', width: 180, sortable: true},
-            {field: 'createTime', title: '手机', width: 100},
+            {field: 'createTime', title: '创建时间', width: 100},
             {field: 'listprice', title: '地区', width: 100},
             {field: 'attr1', title: '地区', width: 100},
             {field: 'itemid', title: '是否启用', width: 100},
+            {field: 'numSn', hidden: true},
         ]]
     });
 

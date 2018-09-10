@@ -13,10 +13,4 @@ public interface UserMapper extends IBaseMapper<User> {
      */
     User selectByUsername(@Param("username") String username);
 
-//    /**
-//     *查询用户名是否存在，排除重复添加相同的用户
-//     * @param params 用户名
-//     * @return 放回根据用户名查询的结果
-//     */
-//    User findUserByUsername(@Param("cm") Map<String,Object> params);
 }
